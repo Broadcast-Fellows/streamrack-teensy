@@ -1,36 +1,15 @@
 
 unsigned int decode_base64(unsigned char input[], unsigned int input_length, unsigned char output[]) {
   unsigned int output_length = decode_base64_length(input, input_length);
-  byte scale = 0;
-  byte row = 0;
+
   // While there are still full sets of 24 bits...
   for(unsigned int i = 2; i < output_length; i += 3) {
     output[0] = base64_to_binary(input[0]) << 2 | base64_to_binary(input[1]) >> 4;
     output[1] = base64_to_binary(input[1]) << 4 | base64_to_binary(input[2]) >> 2;
     output[2] = base64_to_binary(input[2]) << 6 | base64_to_binary(input[3]);
-//
-//    if(scale%3==0){
-//      output[3] = base64_to_binary(input[0]) << 2 | base64_to_binary(input[1]) >> 4;
-//      output[4] = base64_to_binary(input[1]) << 4 | base64_to_binary(input[2]) >> 2;
-//      output[5] = base64_to_binary(input[2]) << 6 | base64_to_binary(input[3]);
-//      output+=6;
-//    }else{
-//      output += 3;
-//    }
 
     output += 3;
     input += 4;
-
-//    scale++;
-//    if(scale>74){
-//      scale = 0;
-//      row++;
-//      if(row%3==0){
-//        i-=74*3;
-//        output-=74*3
-//        input-=74*4;
-//      }
-//    }
 
   }
   

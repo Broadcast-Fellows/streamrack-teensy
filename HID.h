@@ -8,8 +8,10 @@ public:
   HIDDumpController(USBHost &host, uint32_t usage = 0) : fixed_usage_(usage) { init(); }
   uint32_t usage(void) {return usage_;}
   static bool changed_data_only;
-  uint8_t hid_tx_buffer1[5840];
-  uint8_t hid_tx_buffer2[5840];
+  uint8_t hid_tx_buffer1[8192];//[5840];
+  uint8_t hid_tx_buffer2[8192];//[5840];
+//   DMAMEM uint8_t hid_tx_buffer1[8192];
+// DMAMEM uint8_t hid_tx_buffer2[8192];
   
 protected:
   virtual hidclaim_t claim_collection(USBHIDParser *driver, Device_t *dev, uint32_t topusage);
